@@ -1,0 +1,162 @@
+[
+  {
+    "methods": [
+      {
+        "mode": 0,
+        "name": "loadUrl"
+      }
+    ],
+    "name": "system.webview",
+    "instantiable": false
+  },
+  {
+    "methods": [
+      {
+        "mode": 0,
+        "name": "stop"
+      },
+      {
+        "mode": 0,
+        "name": "start"
+      }
+    ],
+    "name": "system.resident",
+    "instantiable": false
+  },
+  {
+    "methods": [
+      {
+        "mode": 1,
+        "name": "add"
+      },
+      {
+        "mode": 1,
+        "name": "checkState"
+      }
+    ],
+    "name": "system.card",
+    "instantiable": false
+  },
+  {
+    "methods": [
+      {
+        "mode": 0,
+        "name": "getComputedStyle"
+      },
+      {
+        "mode": 0,
+        "name": "getComponent"
+      },
+      {
+        "mode": 0,
+        "name": "getBoundingRect"
+      },
+      {
+        "mode": 0,
+        "name": "getComputedAttr"
+      }
+    ],
+    "name": "system.model",
+    "instantiable": false
+  },
+  {
+    "methods": [
+      {
+        "mode": 0,
+        "name": "finishPage"
+      },
+      {
+        "mode": 0,
+        "name": "setMenubarTips"
+      },
+      {
+        "mode": 0,
+        "name": "getMenuBarBoundingRect"
+      },
+      {
+        "mode": 0,
+        "name": "setMenubarData"
+      },
+      {
+        "mode": 0,
+        "name": "getMenuBarRect"
+      }
+    ],
+    "name": "system.page",
+    "instantiable": false
+  },
+  {
+    "methods": [
+      {
+        "mode": 0,
+        "name": "exit"
+      },
+      {
+        "mode": 0,
+        "name": "getInfo"
+      },
+      {
+        "mode": 1,
+        "name": "createQuickAppQRCode"
+      }
+    ],
+    "name": "system.app",
+    "instantiable": false
+  },
+  {
+    "methods": [
+      {
+        "mode": 0,
+        "name": "getThemeMode"
+      },
+      {
+        "mode": 0,
+        "name": "getLocale"
+      },
+      {
+        "mode": 0,
+        "name": "setGrayMode"
+      },
+      {
+        "mode": 0,
+        "name": "setLocale"
+      }
+    ],
+    "name": "system.configuration",
+    "instantiable": false
+  },
+  {
+    "methods": [
+      {
+        "mode": 0,
+        "name": "getState"
+      },
+      {
+        "mode": 0,
+        "name": "replace"
+      },
+      {
+        "mode": 0,
+        "name": "clear"
+      },
+      {
+        "mode": 0,
+        "name": "back"
+      },
+      {
+        "mode": 0,
+        "name": "getLength"
+      },
+      {
+        "mode": 0,
+        "name": "getPages"
+      },
+      {
+        "mode": 0,
+        "name": "push"
+      }
+    ],
+    "name": "system.router",
+    "instantiable": false
+  }
+]

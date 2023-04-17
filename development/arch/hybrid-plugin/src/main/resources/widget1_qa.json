@@ -1,0 +1,28 @@
+[
+  {
+    "methods": [
+      {
+        "mode": 1,
+        "name": "preloadImage"
+      },
+      {
+        "mode": 0,
+        "name": "canvasNative2D"
+      },
+      {
+        "mode": 0,
+        "name": "enable"
+      },
+      {
+        "mode": 0,
+        "name": "canvasNative2DSync"
+      },
+      {
+        "mode": 0,
+        "name": "getContext"
+      }
+    ],
+    "name": "system.canvas",
+    "instantiable": false
+  }
+]

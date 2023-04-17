@@ -1,0 +1,572 @@
+[
+  {
+    "name": "ad"
+  },
+  {
+    "name": "ad-clickable-area"
+  },
+  {
+    "name": "input",
+    "types": [
+      "eventbutton"
+    ],
+    "methods": [
+      "focus",
+      "animate",
+      "getBoundingClientRect",
+      "toTempFilePath"
+    ]
+  },
+  {
+    "name": "picker",
+    "types": [
+      "multi-text"
+    ],
+    "methods": [
+      "show",
+      "animate",
+      "focus",
+      "toTempFilePath",
+      "getBoundingClientRect"
+    ]
+  },
+  {
+    "name": "progress",
+    "types": [
+      "circular"
+    ],
+    "methods": [
+      "animate",
+      "getBoundingClientRect",
+      "toTempFilePath",
+      "focus"
+    ]
+  },
+  {
+    "name": "mediaad"
+  },
+  {
+    "name": "picker",
+    "types": [
+      "time"
+    ],
+    "methods": [
+      "show",
+      "animate",
+      "focus",
+      "toTempFilePath",
+      "getBoundingClientRect"
+    ]
+  },
+  {
+    "name": "picker",
+    "types": [
+      "text"
+    ],
+    "methods": [
+      "show",
+      "animate",
+      "focus",
+      "toTempFilePath",
+      "getBoundingClientRect"
+    ]
+  },
+  {
+    "name": "swiper",
+    "methods": [
+      "swipeTo",
+      "animate",
+      "getBoundingClientRect",
+      "toTempFilePath",
+      "focus"
+    ]
+  },
+  {
+    "name": "tab-bar",
+    "methods": [
+      "animate",
+      "getBoundingClientRect",
+      "toTempFilePath",
+      "focus"
+    ]
+  },
+  {
+    "name": "tabs",
+    "methods": [
+      "animate",
+      "getBoundingClientRect",
+      "toTempFilePath",
+      "focus"
+    ]
+  },
+  {
+    "name": "input",
+    "types": [
+      "text",
+      "date",
+      "time",
+      "email",
+      "number",
+      "password",
+      "tel"
+    ],
+    "methods": [
+      "focus",
+      "animate",
+      "getBoundingClientRect",
+      "toTempFilePath",
+      "select",
+      "setSelectionRange",
+      "getSelectionRange"
+    ]
+  },
+  {
+    "name": "shortcut-button",
+    "methods": [
+      "focus",
+      "animate",
+      "getBoundingClientRect",
+      "toTempFilePath"
+    ]
+  },
+  {
+    "name": "tab-content",
+    "methods": [
+      "animate",
+      "getBoundingClientRect",
+      "toTempFilePath",
+      "focus"
+    ]
+  },
+  {
+    "name": "input",
+    "types": [
+      "radio"
+    ],
+    "methods": [
+      "focus",
+      "animate",
+      "getBoundingClientRect",
+      "toTempFilePath"
+    ]
+  },
+  {
+    "name": "label",
+    "methods": [
+      "focus",
+      "animate",
+      "getBoundingClientRect",
+      "toTempFilePath"
+    ]
+  },
+  {
+    "name": "bounce"
+  },
+  {
+    "name": "section-item",
+    "methods": [
+      "animate",
+      "getBoundingClientRect",
+      "toTempFilePath",
+      "focus"
+    ]
+  },
+  {
+    "name": "refresh-footer",
+    "methods": [
+      "animate",
+      "getBoundingClientRect",
+      "toTempFilePath",
+      "focus"
+    ]
+  },
+  {
+    "name": "canvas",
+    "methods": [
+      "toTempFilePath",
+      "getBoundingClientRect",
+      "focus"
+    ]
+  },
+  {
+    "name": "refresh2",
+    "methods": [
+      "animate",
+      "getBoundingClientRect",
+      "toTempFilePath",
+      "focus",
+      "startPullDownRefresh",
+      "startPullUpRefresh",
+      "stopPullDownRefresh",
+      "stopPullUpRefresh"
+    ]
+  },
+  {
+    "name": "section-header",
+    "methods": [
+      "animate",
+      "getBoundingClientRect",
+      "toTempFilePath",
+      "focus"
+    ]
+  },
+  {
+    "name": "list-item",
+    "methods": [
+      "animate",
+      "toTempFilePath",
+      "focus",
+      "getBoundingClientRect"
+    ]
+  },
+  {
+    "name": "map",
+    "methods": [
+      "getCenterLocation",
+      "translateMarker",
+      "moveToMyLocation",
+      "includePoints",
+      "getCoordType",
+      "convertCoord",
+      "getRegion",
+      "getScale",
+      "getSupportedCoordTypes",
+      "setIndoorEnable",
+      "switchIndoorFloor",
+      "setCompassPosition",
+      "setScalePosition",
+      "setZoomPosition",
+      "setMaxAndMinScaleLevel",
+      "getBoundingClientRect",
+      "toTempFilePath",
+      "focus"
+    ]
+  },
+  {
+    "name": "stack",
+    "methods": [
+      "animate",
+      "requestFullscreen",
+      "getBoundingClientRect",
+      "toTempFilePath",
+      "focus"
+    ]
+  },
+  {
+    "name": "drawer-navigation",
+    "methods": [
+      "animate",
+      "getBoundingClientRect",
+      "toTempFilePath",
+      "focus"
+    ]
+  },
+  {
+    "name": "div",
+    "methods": [
+      "animate",
+      "getBoundingClientRect",
+      "toTempFilePath",
+      "focus"
+    ]
+  },
+  {
+    "name": "slider",
+    "methods": [
+      "animate",
+      "getBoundingClientRect",
+      "toTempFilePath",
+      "focus"
+    ]
+  },
+  {
+    "name": "picker",
+    "types": [
+      "date"
+    ],
+    "methods": [
+      "show",
+      "animate",
+      "focus",
+      "toTempFilePath",
+      "getBoundingClientRect"
+    ]
+  },
+  {
+    "name": "web",
+    "methods": [
+      "reload",
+      "forward",
+      "back",
+      "canForward",
+      "canBack",
+      "postMessage",
+      "isSupportWebRTC",
+      "getBoundingClientRect",
+      "toTempFilePath",
+      "focus"
+    ]
+  },
+  {
+    "name": "input",
+    "types": [
+      "button"
+    ],
+    "methods": [
+      "focus",
+      "animate",
+      "getBoundingClientRect",
+      "toTempFilePath"
+    ]
+  },
+  {
+    "name": "switch",
+    "methods": [
+      "animate",
+      "getBoundingClientRect",
+      "toTempFilePath",
+      "focus"
+    ]
+  },
+  {
+    "name": "richtext",
+    "methods": [
+      "addContent",
+      "getBoundingClientRect",
+      "animate",
+      "toTempFilePath",
+      "focus"
+    ]
+  },
+  {
+    "name": "rating",
+    "methods": [
+      "animate",
+      "getBoundingClientRect",
+      "toTempFilePath",
+      "focus"
+    ]
+  },
+  {
+    "name": "input",
+    "types": [
+      "checkbox"
+    ],
+    "methods": [
+      "focus",
+      "animate",
+      "getBoundingClientRect",
+      "toTempFilePath"
+    ]
+  },
+  {
+    "name": "marquee",
+    "methods": [
+      "pause",
+      "resume",
+      "start",
+      "stop",
+      "animate",
+      "getBoundingClientRect",
+      "focus",
+      "toTempFilePath"
+    ]
+  },
+  {
+    "name": "a",
+    "methods": [
+      "animate",
+      "getBoundingClientRect",
+      "toTempFilePath",
+      "focus"
+    ]
+  },
+  {
+    "name": "image",
+    "methods": [
+      "animate",
+      "getBoundingClientRect",
+      "toTempFilePath",
+      "focus",
+      "startAnimation",
+      "stopAnimation"
+    ]
+  },
+  {
+    "name": "section-list",
+    "methods": [
+      "animate",
+      "getBoundingClientRect",
+      "toTempFilePath",
+      "focus",
+      "scrollTo"
+    ]
+  },
+  {
+    "name": "section-group",
+    "methods": [
+      "animate",
+      "getBoundingClientRect",
+      "toTempFilePath",
+      "focus",
+      "expand",
+      "scrollTo"
+    ]
+  },
+  {
+    "name": "slide-view",
+    "methods": [
+      "animate",
+      "getBoundingClientRect",
+      "toTempFilePath",
+      "open",
+      "close",
+      "hideSecondaryConfirm"
+    ]
+  },
+  {
+    "name": "obusiness-button",
+    "methods": [
+      "getOBusinessState",
+      "success",
+      "cancel",
+      "fail",
+      "onclick"
+    ]
+  },
+  {
+    "name": "refresh-header",
+    "methods": [
+      "animate",
+      "getBoundingClientRect",
+      "toTempFilePath",
+      "focus"
+    ]
+  },
+  {
+    "name": "option",
+    "methods": [
+      "focus"
+    ]
+  },
+  {
+    "name": "span",
+    "methods": [
+      "focus"
+    ]
+  },
+  {
+    "name": "popup",
+    "methods": [
+      "animate",
+      "toTempFilePath",
+      "focus",
+      "getBoundingClientRect"
+    ]
+  },
+  {
+    "name": "progress",
+    "types": [
+      "horizontal"
+    ],
+    "methods": [
+      "animate",
+      "getBoundingClientRect",
+      "toTempFilePath",
+      "focus"
+    ]
+  },
+  {
+    "name": "text",
+    "types": [
+      "text"
+    ],
+    "methods": [
+      "animate",
+      "getBoundingClientRect",
+      "toTempFilePath",
+      "focus"
+    ]
+  },
+  {
+    "name": "select",
+    "methods": [
+      "animate",
+      "getBoundingClientRect",
+      "toTempFilePath",
+      "focus"
+    ]
+  },
+  {
+    "name": "list",
+    "methods": [
+      "scrollTo",
+      "scrollBy",
+      "animate",
+      "getBoundingClientRect",
+      "toTempFilePath",
+      "focus"
+    ]
+  },
+  {
+    "name": "custommarker",
+    "methods": [
+      "getBoundingClientRect",
+      "focus",
+      "toTempFilePath"
+    ]
+  },
+  {
+    "name": "share-button",
+    "methods": [
+      "focus",
+      "animate",
+      "getBoundingClientRect",
+      "toTempFilePath"
+    ]
+  },
+  {
+    "name": "text",
+    "types": [
+      "html"
+    ],
+    "methods": [
+      "animate",
+      "getBoundingClientRect",
+      "toTempFilePath",
+      "focus"
+    ]
+  },
+  {
+    "name": "textarea",
+    "methods": [
+      "focus",
+      "animate",
+      "getBoundingClientRect",
+      "toTempFilePath",
+      "select",
+      "setSelectionRange",
+      "getSelectionRange"
+    ]
+  },
+  {
+    "name": "refresh",
+    "methods": [
+      "animate",
+      "getBoundingClientRect",
+      "toTempFilePath",
+      "focus"
+    ]
+  },
+  {
+    "name": "drawer",
+    "methods": [
+      "openDrawer",
+      "closeDrawer",
+      "animate",
+      "getBoundingClientRect",
+      "toTempFilePath",
+      "focus"
+    ]
+  }
+]

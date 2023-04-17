@@ -9,7 +9,6 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':annotation')
     api 'com.fasterxml.jackson.core:jackson-databind:2.11.0'
-    compileOnly files(org.gradle.internal.jvm.Jvm.current().getToolsJar())
 }
 
 sourceCompatibility = "1.8"
