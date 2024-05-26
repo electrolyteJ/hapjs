@@ -52,6 +52,8 @@ import org.hapjs.render.vdom.DocComponent;
 import org.hapjs.runtime.HapEngine;
 import org.hapjs.widgets.view.video.FlexVideoView;
 
+import static org.hapjs.component.constants.Attributes.Style.MARK;
+
 @WidgetAnnotation(
         name = Video.WIDGET_NAME,
         methods = {
@@ -62,7 +64,9 @@ import org.hapjs.widgets.view.video.FlexVideoView;
                 Video.METHOD_SNAP_SHOT,
                 Component.METHOD_REQUEST_FULLSCREEN,
                 Component.METHOD_GET_BOUNDING_CLIENT_RECT,
-                Component.METHOD_FOCUS
+                Component.METHOD_FOCUS,
+                Component.METHOD_TALKBACK_FOCUS,
+                Component.METHOD_TALKBACK_ANNOUNCE
         })
 public class Video extends Component<FlexVideoView> implements SwipeObserver {
 
@@ -93,6 +97,7 @@ public class Video extends Component<FlexVideoView> implements SwipeObserver {
     private static final String TITLE_BAR = "titlebar";
     private static final String TITLE = "title";
     private static final String PLAY_COUNT = "playcount";
+    private static final String SPEED = "speed";
 
     private static final String CURRENT_TIME = "currenttime";
 
@@ -123,6 +128,7 @@ public class Video extends Component<FlexVideoView> implements SwipeObserver {
     private static final String RESULT_SIZE = "size";
 
     private static final int IMAGE_QUALITY = 100;
+    public static final float SPEED_DEFAULT = 1.0f;
     private long mMinLastModified;
     private static final long MAX_ALIVE_TIME_MILLIS = 60 * 60 * 1000L;
 
@@ -214,6 +220,10 @@ public class Video extends Component<FlexVideoView> implements SwipeObserver {
                 String uri = Attributes.getString(attribute);
                 setVideoURI(uri);
                 return true;
+            case MARK:
+                String mark = Attributes.getString(attribute);
+                setVideoMark(mark);
+                return true;
             case Attributes.Style.AUTO_PLAY:
                 boolean autoPlay = Attributes.getBoolean(attribute, false);
                 setAutoPlay(autoPlay);
@@ -271,6 +281,17 @@ public class Video extends Component<FlexVideoView> implements SwipeObserver {
                 }
                 super.setAttribute(key, attribute);
                 return true;
+            case SPEED:
+                String speedStr = Attributes.getString(attribute, "1");
+                float speed = SPEED_DEFAULT;
+                try {
+                    speed = Float.parseFloat(speedStr);
+                } catch (NumberFormatException e) {
+                    Log.d(TAG, "parse speed error:" + e);
+                    speed = SPEED_DEFAULT;
+                }
+                setSpeed(speed);
+                return true;
             default:
                 break;
         }
@@ -286,9 +307,12 @@ public class Video extends Component<FlexVideoView> implements SwipeObserver {
             mHost.setOnErrorListener(
                     new FlexVideoView.OnErrorListener() {
                         @Override
-                        public boolean onError(int what, int extra) {
+                        public boolean onError(int what, int extra, HashMap<String, Object> datas) {
                             Log.w(TAG, "Error, what:" + what + " extra:" + extra);
                             Map<String, Object> params = new HashMap();
+                            if (null != datas) {
+                                params.putAll(datas);
+                            }
                             params.put("what", what);
                             params.put("extra", extra);
                             mCallback
@@ -461,6 +485,13 @@ public class Video extends Component<FlexVideoView> implements SwipeObserver {
         }
         mHost.setVideoURI(tmpUri);
         NetworkReportManager.getInstance().reportNetwork(NetworkReportManager.KEY_VIDEO, uri.toString());
+    }
+
+    public void setVideoMark(String mark) {
+        if (mHost == null) {
+            return;
+        }
+        mHost.setMark(mark);
     }
 
     public void setAutoPlay(boolean autoPlay) {
@@ -891,5 +922,12 @@ public class Video extends Component<FlexVideoView> implements SwipeObserver {
             default:
                 break;
         }
+    }
+
+    private void setSpeed(float speed) {
+        if (speed <= 0) {
+            speed = SPEED_DEFAULT;
+        }
+        mHost.setSpeed(speed);
     }
 }

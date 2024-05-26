@@ -28,10 +28,12 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 
 import com.facebook.common.executors.UiThreadImmediateExecutorService;
 import com.facebook.common.util.UriUtil;
@@ -54,6 +56,7 @@ import com.facebook.drawee.generic.RoundingParams;
 import com.facebook.drawee.view.AspectRatioMeasure;
 import com.facebook.drawee.view.GenericDraweeView;
 import com.facebook.fresco.animation.drawable.AnimatedDrawable2;
+import com.facebook.imagepipeline.common.ImageDecodeOptions;
 import com.facebook.imagepipeline.common.ResizeOptions;
 import com.facebook.imagepipeline.common.RotationOptions;
 import com.facebook.imagepipeline.core.ImagePipeline;
@@ -77,6 +80,7 @@ import org.hapjs.common.utils.FloatUtil;
 import org.hapjs.common.utils.SvgDecoderUtil;
 import org.hapjs.common.utils.UriUtils;
 import org.hapjs.component.Component;
+import org.hapjs.component.ComponentProvider;
 import org.hapjs.component.bridge.RenderEventCallback;
 import org.hapjs.component.constants.Attributes;
 import org.hapjs.component.constants.Corner;
@@ -92,6 +96,7 @@ import org.hapjs.render.Page;
 import org.hapjs.render.RootView;
 import org.hapjs.runtime.ConfigurationManager;
 import org.hapjs.runtime.DarkThemeUtil;
+import org.hapjs.runtime.ProviderManager;
 import org.hapjs.widgets.Image;
 import org.hapjs.widgets.R;
 
@@ -109,6 +114,8 @@ public class FlexImageView extends GenericDraweeView implements ComponentHost, G
     private static final String TAG = "FlexImageView";
     private static final String STRETCH = "stretch";
     private static final String CENTER = "center";
+    private static final String QUALITY_HIGH = "high";
+    private static final String QUALITY_LOW = "low";
     private final FlexImageViewAttach mViewAttach;
     private final AbstractDraweeControllerBuilder mDraweeControllerBuilder;
     private final RoundedCornerPostprocessor mRoundedCornerPostprocessor;
@@ -146,6 +153,7 @@ public class FlexImageView extends GenericDraweeView implements ComponentHost, G
     private String mObjectFit;
     private boolean mAltObjectFitHasApplied = false;
     private boolean mAutoplay = true;
+    private String mQuality = QUALITY_HIGH;
     private Animatable mAnimatable = null;
     private boolean mIsStartAnimation = false;
     private AutoplayManager mAutoplayManager;
@@ -157,6 +165,7 @@ public class FlexImageView extends GenericDraweeView implements ComponentHost, G
 
     public FlexImageView(Context context) {
         super(context, buildHierarchy(context));
+        initScaleType();
         mRoundedCornerPostprocessor = new RoundedCornerPostprocessor();
         mDraweeControllerBuilder = Fresco.newDraweeControllerBuilder();
         mViewAttach = new FlexImageViewAttach(this);
@@ -175,6 +184,27 @@ public class FlexImageView extends GenericDraweeView implements ComponentHost, G
                         return true;
                     }
                 });
+        initBitmapQuality(context);
+    }
+
+    private void initScaleType() {
+        ComponentProvider componentProvider = ProviderManager.getDefault()
+                .getProvider(ComponentProvider.NAME);
+        if (null != componentProvider) {
+            mScaleType = componentProvider.isSysShowSizeChange() ? ScalingUtils.ScaleType.FIT_CENTER : ScalingUtils.ScaleType.CENTER_CROP;
+        }
+    }
+
+    private void initBitmapQuality(Context context) {
+        ComponentProvider componentProvider = ProviderManager.getDefault()
+                .getProvider(ComponentProvider.NAME);
+        if (componentProvider != null && componentProvider.isDefaultRgb565EnableBelowAndroidO(context)) {
+            /*
+             * Android O以下版本Bitmap内存在Java堆上，有阈值限制。默认是RGB565，减少内存占用，降低OOM
+             * Android O及以上版本Bitmap内存在Native堆上，没有阈值限制。默认是ARGB8888
+             */
+            mQuality = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O ? QUALITY_HIGH : QUALITY_LOW;
+        }
     }
 
     private static GenericDraweeHierarchy buildHierarchy(Context context) {
@@ -329,6 +359,10 @@ public class FlexImageView extends GenericDraweeView implements ComponentHost, G
             return mSource.toString();
         }
         return null;
+    }
+
+    public void setQuality(String quality) {
+        mQuality = quality;
     }
 
     /**
@@ -638,6 +672,8 @@ public class FlexImageView extends GenericDraweeView implements ComponentHost, G
                 && mScaleType != ScalingUtils.ScaleType.CENTER;
         ResizeOptions resizeOptions = doResize ? new ResizeOptions(width, height) : null;
         RequestListener requestListener = new ImageSizeDetectRequestListener();
+        Bitmap.Config config = QUALITY_LOW.equals(mQuality) ?
+                Bitmap.Config.RGB_565 : Bitmap.Config.ARGB_8888;
         ImageRequest imageRequest =
                 ImageRequestBuilder.newBuilderWithSource(mSource)
                         .setPostprocessor(postprocessor)
@@ -645,6 +681,9 @@ public class FlexImageView extends GenericDraweeView implements ComponentHost, G
                         .setRotationOptions(RotationOptions.autoRotate())
                         .setProgressiveRenderingEnabled(mProgressiveRenderingEnabled)
                         .setRequestListener(requestListener)
+                        .setImageDecodeOptions(ImageDecodeOptions.newBuilder()
+                                .setBitmapConfig(config)
+                                .build())
                         .build();
 
         final boolean supportLargeImage = shouldSupportLargeImage();
@@ -1322,6 +1361,15 @@ public class FlexImageView extends GenericDraweeView implements ComponentHost, G
 
             canvas.drawPath(pathForBorderRadius, paint);
         }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    @Override
+    public void onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo info) {
+        super.onInitializeAccessibilityNodeInfo(info);
+        info.setClassName("");
+        info.setClickable(false);
+        info.removeAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_CLICK);
     }
 
     private class ImageSizeDetectRequestListener extends BaseRequestListener {

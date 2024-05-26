@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2022, the hapjs-platform Project Contributors
+ * Copyright (c) 2021-present, the hapjs-platform Project Contributors
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -46,7 +46,9 @@ import org.json.JSONObject;
                 Camera.METHOD_GET_EXPOSURE_VALUE,
                 Camera.METHOD_GET_FPS_RANGE,
                 Camera.METHOD_START_RECORD,
-                Camera.METHOD_STOP_RECORD
+                Camera.METHOD_STOP_RECORD,
+                Component.METHOD_TALKBACK_FOCUS,
+                Component.METHOD_TALKBACK_ANNOUNCE
         })
 public class Camera extends Component<CameraView> {
 
@@ -801,7 +803,7 @@ public class Camera extends Component<CameraView> {
     @Override
     public void onActivityResume() {
         super.onActivityResume();
-        if (mHost != null && mHost.isAttachedToWindow()) {
+        if (mHost != null && mHost.isAttachedToWindow() && mHost.mIsHasPermission) {
             mHost.enableOrientationListener();
             mHost.startCamera();
             mHost.onActivityResume();
@@ -811,7 +813,7 @@ public class Camera extends Component<CameraView> {
     @Override
     public void onActivityPause() {
         super.onActivityPause();
-        if (mHost != null && mHost.isAttachedToWindow()) {
+        if (mHost != null && mHost.isAttachedToWindow() && mHost.mIsHasPermission) {
             mHost.stopCamera();
             mHost.disableOrientationListener();
             mHost.onActivityPause();

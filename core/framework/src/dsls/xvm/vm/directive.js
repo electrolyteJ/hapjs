@@ -85,7 +85,7 @@ function bindSubVm(vm, subVm, template, repeatItem) {
     vm._$listeners.forEach(_listener => {
       mergeListeners(_listener, vm, subVm)
     })
-    delete template.attr.$listeners
+    // delete template.attr.$listeners
   }
 
   mergeExternalClasses(options, template, subVm, vm)
@@ -499,15 +499,17 @@ function mergeEvents(events, vm, subVm) {
   for (const key in events) {
     const parentMethodName = events[key]
     subVm.$on($camelize(key), function(...args) {
+      let res
       if (vm && vm[parentMethodName] && typeof vm[parentMethodName] === 'function') {
-        vm[parentMethodName](...args)
+        res = vm[parentMethodName](...args)
       } else if (typeof parentMethodName === 'function') {
-        parentMethodName.apply(vm, args)
+        res = parentMethodName.apply(vm, args)
       } else {
         console.warn(
           `### App Framework ### 子组件: ${subVm._type} 绑定了父组件不存在的方法：'${parentMethodName}'`
         )
       }
+      return res
     })
   }
 }

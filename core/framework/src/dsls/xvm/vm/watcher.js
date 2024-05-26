@@ -10,6 +10,8 @@ import XLinker from './linker'
 
 import { $remove } from '../util'
 
+import { xHandleError, xInvokeWithErrorHandling } from 'src/shared/error'
+
 let _uid = 0
 
 /**
@@ -86,11 +88,20 @@ class XWatcher {
    */
   get() {
     XLinker.pushTarget(this)
+    let value
+    const vm = this.vm
     // console.trace(`### App Framework ### XLinker pushTarget ${this.id}`)
-    const value = this.active ? this.getter.call(this.vmGetter, this.vm) : undefined
-    XLinker.popTarget()
-    // console.trace(`### App Framework ### XLinker popTarget ${this.id}`)
-    this.clearLink()
+    try {
+      value = this.active ? this.getter.call(this.vmGetter, vm) : undefined
+    } catch (e) {
+      // 防止存在错误的 computed属性 不断被重新计算，无限触发错误回调
+      this.dirty = false
+      xHandleError(e, vm, `getter for watcher "${this.expression}"`)
+    } finally {
+      XLinker.popTarget()
+      // console.trace(`### App Framework ### XLinker popTarget ${this.id}`)
+      this.clearLink()
+    }
     return value
   }
 
@@ -166,8 +177,10 @@ class XWatcher {
         // 设置新值
         const oldValue = this.value
         this.value = value
+        const expression = this.expression ? this.expression.originExp || this.expression : ''
+        const info = `callback for watcher "${expression}"`
         // 调用回调
-        this.cb.call(this.vm, value, oldValue)
+        xInvokeWithErrorHandling(this.cb, this.vm, [value, oldValue], this.vm, info)
       }
     }
   }
